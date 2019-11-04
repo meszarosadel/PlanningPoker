@@ -12,6 +12,14 @@ public class RatingTasks {
     public static final String COLUMN_DEVELOPER_ID = "developer_id";
     public static final String COLUMN_TASK_ID = "task_id";
     public static final String COLUMN_PART = "part";
+    public static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME +
+            "("
+            + COLUMN_ID + "INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + COLUMN_DEVELOPER_ID + " INTEGER, "
+            + COLUMN_TASK_ID + " INTEGER, "
+            + COLUMN_PART + " INTEGER, "
+            + "FOREIGN KEY ( " + COLUMN_TASK_ID + ") REFERENCES tasks(id),"
+            + "FOREIGN KEY ( " + COLUMN_DEVELOPER_ID + ") REFERENCES developers(id))";
 
     public RatingTasks(){
     }
