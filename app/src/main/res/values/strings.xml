@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">PlanningPoker</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="login">Login</string>
+    <string name="userName">User name</string>
+    <string name="pwd">Password</string>
+    <string name="login_btn">Login</string>
+    <string name="vote">Please vote!</string>
+    <string name="task">Tasks</string>
+    <string name="score">Scores</string>
+    <string name="vote_btn">Submit</string>
+    <string name="result">Results</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
