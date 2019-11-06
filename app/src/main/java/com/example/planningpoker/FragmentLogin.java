@@ -21,7 +21,8 @@ public class FragmentLogin extends Fragment {
 
     EditText et_name;
     EditText et_pwd;
-    Button button ;
+    Button button;
+
     DatabaseHelper myDb;
 
 
@@ -33,39 +34,32 @@ public class FragmentLogin extends Fragment {
         et_name = getView().findViewById(R.id.et_name);
         et_pwd = getView().findViewById(R.id.et_pwd);
         button = getView().findViewById(R.id.button);
-        return inflater.inflate(R.layout.fragment_fragment_login, container, false);
 
-
-    }
-
-
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Context context = getActivity();
+        final Context context = getActivity();
         myDb = new DatabaseHelper(context);
-
-        button = getActivity().findViewById(R.id.button);
+        View v = inflater.inflate(R.layout.fragment_fragment_login, container, false);
 
         button.setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onClick(View view) {
-                Context context = getActivity();
-                long dev_id= myDb.insertDeveloper(et_name.getText().toString());
-                if (dev_id != 0) {
-                    Toast.makeText(context, "Data Inserted", Toast.LENGTH_LONG).show();
-                    et_name.getText().clear();
-
-                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                    transaction.replace(R.id.frame_id, new FragmentVote());
-                    transaction.commit();
-                }
-                else
-                    Toast.makeText(context, "Data not Inserted", Toast.LENGTH_LONG).show();
-
-
+            public void onClick(View v) {
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        long dev = myDb.insertDeveloper(et_name.getText().toString());
+                        if (dev != 0) {
+                            Toast.makeText(context, "Data Inserted", Toast.LENGTH_LONG).show();
+                            et_name.getText().clear();
+                        }
+                        else
+                            Toast.makeText(context, "Data not Inserted", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         });
-
+        return v;
     }
+
+
 }
 
