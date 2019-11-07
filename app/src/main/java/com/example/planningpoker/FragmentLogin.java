@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -22,6 +23,7 @@ public class FragmentLogin extends Fragment {
     EditText et_name;
     EditText et_pwd;
     Button button;
+    TextView tv_login;
 
     DatabaseHelper myDb;
 
@@ -48,10 +50,21 @@ public class FragmentLogin extends Fragment {
                     @Override
                     public void onClick(View view) {
                         long dev = myDb.insertDeveloper(et_name.getText().toString());
-                        if (dev != 0) {
+
+                        if (dev != 0 ) {
                             Toast.makeText(context, "Data Inserted", Toast.LENGTH_LONG).show();
                             et_name.getText().clear();
+
+                            Fragment fragment = new FragmentVote();
+                            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.frame_id, fragment);
+                            fragmentTransaction.addToBackStack(null);
+                            fragmentTransaction.commit();
+
+
                         }
+
                         else
                             Toast.makeText(context, "Data not Inserted", Toast.LENGTH_LONG).show();
                     }

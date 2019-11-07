@@ -18,6 +18,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db){
         db.execSQL(Developer.CREATE_TABLE);
+
+    }
+
+    public void onCreateVote(SQLiteDatabase db){
         db.execSQL(Task.CREATE_TABLE);
         db.execSQL(RatingTasks.CREATE_TABLE);
     }
