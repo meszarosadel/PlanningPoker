@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -21,7 +22,9 @@ public class FragmentLogin extends Fragment {
 
     EditText et_name;
     EditText et_pwd;
-    Button button ;
+    Button button;
+    TextView tv_login;
+
     DatabaseHelper myDb;
 
 
@@ -29,43 +32,48 @@ public class FragmentLogin extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_fragment_login, container, false);
         // Inflate the layout for this fragment
-        et_name = getView().findViewById(R.id.et_name);
-        et_pwd = getView().findViewById(R.id.et_pwd);
-        button = getView().findViewById(R.id.button);
-        return inflater.inflate(R.layout.fragment_fragment_login, container, false);
+        et_name = v.findViewById(R.id.et_name);
+        et_pwd = v.findViewById(R.id.et_pwd);
+        button = v.findViewById(R.id.button);
 
-
-    }
-
-
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Context context = getActivity();
+        final Context context = getActivity();
         myDb = new DatabaseHelper(context);
 
-        button = getActivity().findViewById(R.id.button);
 
         button.setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onClick(View view) {
-                Context context = getActivity();
-                long dev_id= myDb.insertDeveloper(et_name.getText().toString());
-                if (dev_id != 0) {
-                    Toast.makeText(context, "Data Inserted", Toast.LENGTH_LONG).show();
-                    et_name.getText().clear();
+            public void onClick(View v) {
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        long dev = myDb.insertDeveloper(et_name.getText().toString(), et_pwd.getText().toString());
 
-                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                    transaction.replace(R.id.frame_id, new FragmentVote());
-                    transaction.commit();
-                }
-                else
-                    Toast.makeText(context, "Data not Inserted", Toast.LENGTH_LONG).show();
+                        if (dev != 0) {
+                            Toast.makeText(context, "Data Inserted", Toast.LENGTH_LONG).show();
+                            et_name.getText().clear();
+
+                            Fragment fragment = new FragmentVote();
+                            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.frame_id, fragment);
+                            fragmentTransaction.addToBackStack(null);
+                            fragmentTransaction.commit();
 
 
+                        }
+
+                        else
+                            Toast.makeText(context, "Data not Inserted", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         });
-
+        return v;
     }
+
+
 }
 
