@@ -49,9 +49,9 @@ public class FragmentLogin extends Fragment {
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        long dev = myDb.insertDeveloper(et_name.getText().toString());
+                        long dev = myDb.insertDeveloper(et_name.getText().toString(), et_pwd.getText().toString());
 
-                        if (dev != 0 ) {
+                        if (dev != 0) {
                             Toast.makeText(context, "Data Inserted", Toast.LENGTH_LONG).show();
                             et_name.getText().clear();
 
