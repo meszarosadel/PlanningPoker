@@ -30,14 +30,15 @@ public class FragmentLogin extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_fragment_login, container, false);
         // Inflate the layout for this fragment
-        et_name = getView().findViewById(R.id.et_name);
-        et_pwd = getView().findViewById(R.id.et_pwd);
-        button = getView().findViewById(R.id.button);
+        et_name = v.findViewById(R.id.et_name);
+        et_pwd = v.findViewById(R.id.et_pwd);
+        button = v.findViewById(R.id.button);
 
         final Context context = getActivity();
         myDb = new DatabaseHelper(context);
-        View v = inflater.inflate(R.layout.fragment_fragment_login, container, false);
+
 
         button.setOnClickListener(new View.OnClickListener() {
 
