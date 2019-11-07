@@ -34,10 +34,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public long insertDeveloper ( String developer ){
+    public long insertDeveloper ( String developer, String password ){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(Developer.COLUMN_DEVELOPER, developer);
+        values.put(Developer.COLUMN_PASSWORD, password);
         long id = db.insert(Developer.TABLE_NAME,null, values);
         db.close();
         return id;
@@ -52,7 +53,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return id;
     }
 
-    //public long insertRatingTasks(String rate){}
+    public long insertRatingTasks(String rate, long developer_id, long task_id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(RatingTasks.COLUMN_PART, rate);
+        values.put(RatingTasks.COLUMN_DEVELOPER_ID, developer_id);
+        values.put(RatingTasks.COLUMN_TASK_ID, task_id);
+        long id = db.insert(RatingTasks.TABLE_NAME, null, values);
+        db.close();
+        return id;
+    }
 
     public Developer getDeveloper(long id){
         SQLiteDatabase db = this.getReadableDatabase();
@@ -66,7 +76,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         Developer developer = new Developer(
                 cursor.getInt(cursor.getColumnIndex(Developer.COLUMN_ID)),
-                cursor.getString(cursor.getColumnIndex(Developer.COLUMN_DEVELOPER)));
+                cursor.getString(cursor.getColumnIndex(Developer.COLUMN_DEVELOPER)),
+                cursor.getString(cursor.getColumnIndex(Developer.COLUMN_PASSWORD)));
         cursor.close();
         return developer;
     }
