@@ -8,8 +8,8 @@ public class Developer {
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_DEVELOPER = "developer";
     public  static final String COLUMN_PASSWORD = "password";
-    public static final String CREATE_TABLE = "CREATE TABLE" + TABLE_NAME + "("
-            + COLUMN_ID + "INTEGER PRIMARY KEY AUTOINCREMENT, "
+    public static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + "("
+            + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COLUMN_DEVELOPER + " TEXT,"
             + COLUMN_PASSWORD + " TEXT"
             + ")";
