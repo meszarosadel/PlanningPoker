@@ -9,6 +9,16 @@ public class Task {
             + COLUMN_ID + "INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COLUMN_TASK + " TEXT"
             + ")";
+    public static final String MIGRATE_TABLE = "INSERT INTO " + TABLE_NAME + "VALUES ('TASK1'); "
+            +  "INSERT INTO " + TABLE_NAME + "VALUES ('TASK2'); "
+            +  "INSERT INTO " + TABLE_NAME + "VALUES ('TASK3'); "
+            +  "INSERT INTO " + TABLE_NAME + "VALUES ('TASK4'); "
+            +  "INSERT INTO " + TABLE_NAME + "VALUES ('TASK5'); "
+            +  "INSERT INTO " + TABLE_NAME + "VALUES ('TASK6'); "
+            +  "INSERT INTO " + TABLE_NAME + "VALUES ('TASK7'); "
+            +  "INSERT INTO " + TABLE_NAME + "VALUES ('TASK8'); "
+            +  "INSERT INTO " + TABLE_NAME + "VALUES ('TASK9'); "
+            +  "INSERT INTO " + TABLE_NAME + "VALUES ('TASK10'); ";
 
     private int id;
     private String task;
