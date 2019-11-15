@@ -18,6 +18,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db){
         db.execSQL(Developer.CREATE_TABLE);
+        db.execSQL(Task.CREATE_TABLE);
+        db.execSQL(Task.MIGRATE_TABLE);
 
     }
 
