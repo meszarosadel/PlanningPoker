@@ -101,7 +101,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return task;
     }
-
+    public Cursor getTasks() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from "+Task.TABLE_NAME,null);
+        return res;
+    }
     //public RatingTasks getRatingTasks(long id){}
 
 }
