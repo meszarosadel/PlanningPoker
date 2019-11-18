@@ -21,6 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(Developer.CREATE_TABLE);
         db.execSQL(Task.CREATE_TABLE);
         db.execSQL(Task.MIGRATE_TABLE);
+        db.execSQL(RatingTasks.CREATE_TABLE);
         db.execSQL(RatingTasks.MIGRATE_TABLE);
 
     }
@@ -108,8 +109,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
     public Cursor getRatingTasks() {
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select * from "+RatingTasks.TABLE_NAME,null);
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from "+ RatingTasks.TABLE_NAME,null);
         return res;
     }
     //public RatingTasks getRatingTasks(long id){}

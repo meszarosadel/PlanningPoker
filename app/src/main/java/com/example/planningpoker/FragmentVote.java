@@ -65,7 +65,7 @@ public class FragmentVote extends Fragment {
 
     private void initNames(LayoutInflater inflater, ViewGroup container, Context context){
 
-
+        myDb = new DatabaseHelper(context);
         Cursor res = myDb.getRatingTasks();
         if(res.getCount() == 0) {
             // show message

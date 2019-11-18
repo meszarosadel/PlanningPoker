@@ -25,8 +25,7 @@ public class RatingTasks {
             +  "INSERT INTO " + TABLE_NAME + " VALUES (7,7,7); "
             +  "INSERT INTO " + TABLE_NAME + " VALUES (8,8,8); ";
 
-    public RatingTasks(){
-    }
+
 
     public RatingTasks( int developer_id, int task_id,int part){
         this.developer_id = developer_id;
