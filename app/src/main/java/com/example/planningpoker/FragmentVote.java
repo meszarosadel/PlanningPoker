@@ -28,7 +28,7 @@ public class FragmentVote extends Fragment {
     TextView tv_vote, tv_task, tv_score;
     Button submit_btn;
     DatabaseHelper myDb;
-    private ArrayList<String> mTasks = new ArrayList<>();
+    private ArrayList<String> mRatingTasks = new ArrayList<>();
     private ArrayList<Integer> mVote = new ArrayList<>();
 
 
@@ -66,7 +66,7 @@ public class FragmentVote extends Fragment {
     private void initNames(LayoutInflater inflater, ViewGroup container, Context context){
 
 
-        Cursor res = myDb.getTasks();
+        Cursor res = myDb.getRatingTasks();
         if(res.getCount() == 0) {
             // show message
             Toast.makeText(context, "No list items!", Toast.LENGTH_SHORT).show();
@@ -77,7 +77,8 @@ public class FragmentVote extends Fragment {
         while (res.moveToNext()) {
             buffer.append("Id :"+ res.getString(0)+"\n");
             buffer.append("Task :"+ res.getString(1)+"\n");
-            mTasks.add(res.getString(1));
+            buffer.append("Vote :"+ res.getInt(2)+"\n");
+            mRatingTasks.add(res.getString(0));
             mVote.add(res.getInt(1));
         }
         initRecyclerView(inflater, container);
@@ -91,7 +92,7 @@ public class FragmentVote extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_fragment_vote, container, false);
         RecyclerView recyclerView = v.findViewById(R.id.recyclerView);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(context, mTasks, mVote);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(context, mRatingTasks, mVote);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
     }

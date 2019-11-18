@@ -12,8 +12,11 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    DatabaseHelper myDb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        myDb = new DatabaseHelper(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

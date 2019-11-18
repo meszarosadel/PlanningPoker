@@ -22,6 +22,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private Context mContext;
 
+
     public RecyclerViewAdapter(Context context, ArrayList<String> TaskNames ,ArrayList<Integer> VoteName ) {
         mTaskNames = TaskNames;
         mVote = VoteName;

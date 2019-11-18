@@ -16,6 +16,14 @@ public class RatingTasks {
             + COLUMN_TASK_ID + " INTEGER, "
             + COLUMN_PART + " INTEGER, PRIMARY KEY ("
             + COLUMN_DEVELOPER_ID + "," + COLUMN_TASK_ID + "))";
+    public static final String MIGRATE_TABLE = "INSERT INTO " + TABLE_NAME + " VALUES (1,1,1); "
+            +  "INSERT INTO " + TABLE_NAME + " VALUES (2,2,2); "
+            +  "INSERT INTO " + TABLE_NAME + " VALUES (3,3,3); "
+            +  "INSERT INTO " + TABLE_NAME + " VALUES (4,4,4); "
+            +  "INSERT INTO " + TABLE_NAME + " VALUES (5,5,5); "
+            +  "INSERT INTO " + TABLE_NAME + " VALUES (6,6,6); "
+            +  "INSERT INTO " + TABLE_NAME + " VALUES (7,7,7); "
+            +  "INSERT INTO " + TABLE_NAME + " VALUES (8,8,8); ";
 
     public RatingTasks(){
     }
