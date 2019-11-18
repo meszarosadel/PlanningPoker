@@ -44,9 +44,6 @@ public class FragmentLogin extends Fragment {
 
         button.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         long dev = myDb.insertDeveloper(et_name.getText().toString(), et_pwd.getText().toString());
@@ -54,6 +51,8 @@ public class FragmentLogin extends Fragment {
                         if (dev != 0) {
                             Toast.makeText(context, "Data Inserted", Toast.LENGTH_LONG).show();
                             et_name.getText().clear();
+                            et_pwd.getText().clear();
+
 
                             Fragment fragment = new FragmentVote();
                             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -69,8 +68,6 @@ public class FragmentLogin extends Fragment {
                             Toast.makeText(context, "Data not Inserted", Toast.LENGTH_LONG).show();
                     }
                 });
-            }
-        });
         return v;
     }
 
