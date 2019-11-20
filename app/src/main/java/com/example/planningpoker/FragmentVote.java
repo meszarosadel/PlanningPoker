@@ -30,7 +30,7 @@ public class FragmentVote extends Fragment {
     DatabaseHelper myDb;
     private ArrayList<String> mRatingTasks = new ArrayList<>();
     private ArrayList<Integer> mVote = new ArrayList<>();
-
+    final Context context = getActivity();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,7 +44,6 @@ public class FragmentVote extends Fragment {
         submit_btn = v.findViewById(R.id.submit_btn);
 
         myDb = new DatabaseHelper(context);
-
         initNames(inflater, container, context);
 
         submit_btn.setOnClickListener(new View.OnClickListener() {
@@ -65,7 +64,7 @@ public class FragmentVote extends Fragment {
 
     private void initNames(LayoutInflater inflater, ViewGroup container, Context context){
 
-
+        myDb = new DatabaseHelper(context);
         Cursor res = myDb.getRatingTasks();
         if(res.getCount() == 0) {
             // show message
@@ -77,7 +76,7 @@ public class FragmentVote extends Fragment {
         while (res.moveToNext()) {
             buffer.append("Id :"+ res.getString(0)+"\n");
             buffer.append("Task :"+ res.getString(1)+"\n");
-            buffer.append("Vote :"+ res.getInt(2)+"\n");
+            buffer.append("Vote :"+ res.getInt(1)+"\n");
             mRatingTasks.add(res.getString(0));
             mVote.add(res.getInt(1));
         }
@@ -85,7 +84,7 @@ public class FragmentVote extends Fragment {
     }
 
 
-    final Context context = getActivity();
+
 
     private void initRecyclerView(LayoutInflater inflater,ViewGroup container){
 

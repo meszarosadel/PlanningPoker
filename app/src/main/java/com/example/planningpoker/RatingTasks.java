@@ -6,7 +6,7 @@ public class RatingTasks {
     private int task_id;
     private int  part;
 
-    public static final String TABLE_NAME = "ratingTasks";
+    public static final String TABLE_NAME = "RatingTasks";
     public static final String COLUMN_DEVELOPER_ID = "developer_id";
     public static final String COLUMN_TASK_ID = "task_id";
     public static final String COLUMN_PART = "part";
@@ -24,6 +24,7 @@ public class RatingTasks {
             +  "INSERT INTO " + TABLE_NAME + " VALUES (6,6,6); "
             +  "INSERT INTO " + TABLE_NAME + " VALUES (7,7,7); "
             +  "INSERT INTO " + TABLE_NAME + " VALUES (8,8,8); ";
+
 
     public RatingTasks(){
     }

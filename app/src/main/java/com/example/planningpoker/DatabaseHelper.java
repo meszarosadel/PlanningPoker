@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.media.Rating;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -13,7 +14,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public DatabaseHelper(Context context)
     {
-        super(context, DATABASE_NAME, null, 1);
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+
     }
 
     @Override
@@ -21,8 +23,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(Developer.CREATE_TABLE);
         db.execSQL(Task.CREATE_TABLE);
         db.execSQL(Task.MIGRATE_TABLE);
+        db.execSQL(RatingTasks.CREATE_TABLE);
         db.execSQL(RatingTasks.MIGRATE_TABLE);
-
     }
 
     public void onCreateVote(SQLiteDatabase db){
@@ -102,13 +104,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return task;
     }
+
+    public RatingTasks getRatingTask(long dev_id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(RatingTasks.TABLE_NAME,
+                new String[]{RatingTasks.COLUMN_DEVELOPER_ID, RatingTasks.COLUMN_TASK_ID, RatingTasks.COLUMN_PART},
+                RatingTasks.COLUMN_DEVELOPER_ID+ "=?",
+                new String[]{String.valueOf(dev_id)}, null, null, null, null);
+
+        if( cursor != null)
+            cursor.moveToFirst();
+
+        RatingTasks ratingTask = new RatingTasks(
+                cursor.getInt(cursor.getColumnIndex(RatingTasks.COLUMN_DEVELOPER_ID)),
+                cursor.getInt(cursor.getColumnIndex(RatingTasks.COLUMN_TASK_ID)),
+                cursor.getInt(cursor.getColumnIndex(RatingTasks.COLUMN_PART)));
+        cursor.close();
+        return ratingTask;
+    }
     public Cursor getTasks() {
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from "+Task.TABLE_NAME,null);
         return res;
     }
     public Cursor getRatingTasks() {
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from "+RatingTasks.TABLE_NAME,null);
         return res;
     }
